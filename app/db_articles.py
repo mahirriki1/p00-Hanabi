@@ -25,7 +25,10 @@ def get_full_story(story_name):
 def get_newest_edit(story_name):
     return _select_from_main('most_recent', story_name, 'story_name')
 #def get_all_story(user_id):
-    
+
+def get_full_story(story_id):
+    return _select_from_main('full_story', story_id, 'story_id')
+
 def add_entry(story_name, newest_edit, user_id):
     story_exist = True
     pre_story = ""
@@ -43,9 +46,10 @@ def add_entry(story_name, newest_edit, user_id):
     c.execute(f'CREATE TABLE if not exists "{story_name}"(edit_id INTEGER PRIMARY KEY, newest_edit TEXT, user_id INTEGER)')
     temp2 = c.execute(f'SELECT edit_id FROM {story_name}').fetchall()
     edit_id = len(temp2) + 1
-    print(c.execute(f'SELECT * FROM {story_name}').fetchall())
+    #print(c.execute(f'SELECT * FROM {story_name}').fetchall())
     c.execute(f'INSERT INTO "{story_name}" VALUES ({edit_id}, "{newest_edit}", {user_id})')
-    print(c.execute('SELECT * FROM main').fetchall())
+    #print(c.execute('SELECT * FROM main').fetchall())
     db.commit() #save changes
     db.close()  #close database
 add_entry('Hello_World', 'Welcome to the new worlda', 14)
+
