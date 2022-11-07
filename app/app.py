@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, session, flash
 import db_articles, db_users
 
 app = Flask(__name__)
+# generated via terminal command: python3 -c 'import secrets; print(secrets.token_hex())'
 app.secret_key = 'b52635eab6be8ca4c07bd65adc04b27d11a8e251b1e3d16825b881497b1c7af0'
 
 @app.route("/")
@@ -14,30 +15,30 @@ def login():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
+        # for logging in
         if request.form.get("sub0") == "login":
             username = request.form['username']
             password = request.form['password']
             session['username'] = username
+            print(session)
             return render_template('home.html')
-        if request.form.get("sub1") == "register":
+        # for registering
+        if request.form.get("sub0") == "register":
             new_username = request.form['new_username']
             new_password = request.form['new_password']
-            if db_users.username_in_system(new_username):
-                flash('Username already in use')
-                return render_template('login.html')
-            else:
-                db_users.signup(new_username, new_password)
-                session['username'] = new_username
-                flash('Account created')
-                return render_template('home.html')
+            db_users.signup(new_username, new_password)
+            session['username'] = new_username
+            print(session)
+            return render_template('home.html')
         else:
+            # for blank username/password
             if "" == username and "" == password:
-                return render_template('login.html', error = "Enter a username and password.") # TODO: add error message
+                return render_template('login.html', error = "Enter a username and password.")
             elif "" == username or "" == password:
-                return render_template('login.html', error = "Enter a username or password") # TODO: add error message
+                return render_template('login.html', error = "Enter a username or password")
             # for incorrect username/password
             if db_users.username_in_system(username) != username or db_users.get_password(username) != password:
-                return render_template('login.html', error = "Wrong username or password.") # TODO: add error message
+                return render_template('login.html', error = "Wrong username or password.")
     return render_template('login.html')
 
 # the webpage for creating stories
