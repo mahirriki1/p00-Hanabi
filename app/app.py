@@ -6,7 +6,7 @@ import db_articles, db_users
 app = Flask(__name__)
 app.secret_key = 'b52635eab6be8ca4c07bd65adc04b27d11a8e251b1e3d16825b881497b1c7af0'
 
-username = " "
+username = ""
 password = db_users.get_password(username)
 
 @app.route("/")
@@ -33,6 +33,7 @@ def home():
     # for incorrect username/password
     if usr != username or passw != password:
         return render_template('login.html') # TODO: add error message
+    
 
 # the webpage for creating stories
 @app.route('/create', methods=['GET', 'POST'])
@@ -46,7 +47,7 @@ def create():
             flash('Content needed.')
         else:
             db_articles.add_entry(title, content, username)
-            return render_template('display.html')
+            return render_template('display.html') # TODO: change this to an added story screen or smth
     return render_template('create.html')
 
 # webpage for displaying stories
