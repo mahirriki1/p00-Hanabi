@@ -1,5 +1,5 @@
 import sqlite3
-db = sqlite3.connect("users.db")
+db = sqlite3.connect("users.db", check_same_thread=False)
 global c
 c = db.cursor()
 def _select_from(table, data_want, data_give, datatype_give):
