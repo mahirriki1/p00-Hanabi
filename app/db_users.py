@@ -30,7 +30,7 @@ def signup(username, password):
         c.execute(f'INSERT INTO main VALUES ({user_id}, "{username}", "{password}")')
         c.execute(f'CREATE TABLE {username}(story_id INTEGER, edit_id INTEGER)')
     db.commit() #save changes
-    db.close()  #close database
+   # db.close()  #close database
 #return username given an user id
 def get_username_from_id(user_id):
     return(_select_from("main", "username", user_id, "user_id"))
@@ -45,13 +45,13 @@ def add_into_user_db(username, story_id, edit_id):
     if(username_in_system(username)):
         c.execute(f'INSERT INTO {username} VALUES ({story_id}, {edit_id})')
     db.commit() #save changes
-    db.close()  #close database
+    #db.close()  #close database
 def add_into_user_db(user_id, story_id, edit_id):
     username = get_username_from_id(user_id)
     if(username_in_system(username)):
         c.execute(f'INSERT INTO {username} VALUES ({story_id}, {edit_id})')
     db.commit() #save changes
-    db.close()  #close database
+    #db.close()  #close database
 def get_list_of_stories(username):
     stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
     return stories
@@ -62,7 +62,15 @@ def get_list_of_stories(user_id):
     return stories[0]
 
 def change_password(username, new_password):
-    c.execute(f'UPDATE main SET password = {new_password} WHERE username = {username}')
+    c.execute(f'UPDATE main SET password = "{new_password}" WHERE username = "{username}"')
     db.commit() #save changes
-    db.close()  #close database
+    #db.close()  #close database
 
+def remove_user(username):
+    c.execute(f'DELETE FROM main WHERE username = "{username}"')
+    db.commit() #save changes
+    #db.close()  #close database
+
+# print(c.execute('SELECT * FROM main').fetchall())
+# remove_user("Kevin")
+# print(c.execute('SELECT * FROM main').fetchall())
