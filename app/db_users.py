@@ -23,13 +23,14 @@ def get_password(username):
 def signup(username, password):
     c.execute("CREATE TABLE if not exists main(user_id INTEGER PRIMARY KEY, username TEXT, password TEXT)")
     if(username_in_system(username)):
-        return 0
+        return False
     else:
         temp2 = c.execute(f'SELECT user_id FROM main').fetchall()
         user_id = len(temp2) + 1
         c.execute(f'INSERT INTO main VALUES ({user_id}, "{username}", "{password}")')
         c.execute(f'CREATE TABLE {username}(story_id INTEGER, edit_id INTEGER)')
-    db.commit() #save changes
+    db.commit()
+    return True #save changes
    # db.close()  #close database
 #return username given an user id
 def get_username_from_id(user_id):
