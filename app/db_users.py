@@ -61,3 +61,8 @@ def get_list_of_stories(user_id):
     stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
     return stories[0]
 
+def change_password(username, new_password):
+    c.execute(f'UPDATE main SET password = {new_password} WHERE username = {username}')
+    db.commit() #save changes
+    db.close()  #close database
+
