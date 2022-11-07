@@ -1,2 +1,3 @@
 ravindraM -- 2022-11-03 08:11 : Clearer explanation of part components, descriptions of the mechanisms we plan to use in order to split up the work without causing significant merge errors.
 mahirR -- 2022-11-07 02:31 AM : edited app.py so the database commands would be imported and used
+kevinL -- 2022-11-1:08 PM: Finished most of the methods required for app.py to access database and connect with html.
