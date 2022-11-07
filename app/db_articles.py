@@ -50,6 +50,6 @@ def add_entry(story_name, newest_edit, user_id):
     c.execute(f'INSERT INTO "{story_name}" VALUES ({edit_id}, "{newest_edit}", {user_id})')
     #print(c.execute('SELECT * FROM main').fetchall())
     db.commit() #save changes
-    db.close()  #close database
+    #db.close()  #close database
 add_entry('Hello_World', 'Welcome to the new worlda', 14)
 
