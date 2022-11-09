@@ -32,9 +32,11 @@ def home():
                     return render_template('home.html')
                 else:
                     return render_template('login.html', error = "Wrong password.")
-            # for blank username/password
-            if "" == username or "" == password:
-                return render_template('login.html', error = "Enter a username and/or password.")
+            else:
+                # for blank username/password
+                if "" == username or "" == password:
+                    return render_template('login.html', error = "Enter a username and/or password.")
+                return render_template('login.html', error = "Username not in system.")
         # for registering
         elif request.form.get("sub0") == "register":
             new_username = request.form['new_username']
