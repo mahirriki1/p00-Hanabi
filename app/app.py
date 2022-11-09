@@ -3,9 +3,9 @@ import db_articles, db_users
 
 app = Flask(__name__)
 # generated via terminal command: python3 -c 'import secrets; print(secrets.token_hex())'
-app.secret_key = 'b52635eab6be8ca4c07bd65adc04b27d11a8e251b1e3d16825b881497b1c7af0'
+app.secret_key = 'b52635eab6be8ca4c07bd65adc04b27d11a8e251b1e3d16825b881497b1c7af1'
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def login():
     if 'username' in session:
         return render_template('home.html')
@@ -19,26 +19,33 @@ def home():
         if request.form.get("sub0") == "login":
             username = request.form['username']
             password = request.form['password']
-            session['username'] = username
-            print(session)
-            return render_template('home.html')
+            # this set of if statements is for checking if user is in system; if in system, check if password is correct
+            # if password is incorrect, return to login page and say wrong password
+            if db_users.username_in_system(username):
+                if db_users.get_password(username) == password:
+                    session['username'] = username
+                    print(session)
+                    return render_template('home.html')
+                else:
+                    return render_template('login.html', error = "Wrong password.")
         # for registering
         if request.form.get("sub0") == "register":
             new_username = request.form['new_username']
             new_password = request.form['new_password']
-            db_users.signup(new_username, new_password)
-            session['username'] = new_username
-            print(session)
-            return render_template('home.html')
+            # to check if username is already registered
+            if db_users.username_in_system(new_username):
+                return render_template('login.html', error = "Username in system.")
+            else:
+                db_users.signup(new_username, new_password)
+                session['username'] = new_username
+                print(session)
+                return render_template('home.html')
         else:
             # for blank username/password
             if "" == username and "" == password:
                 return render_template('login.html', error = "Enter a username and password.")
             elif "" == username or "" == password:
                 return render_template('login.html', error = "Enter a username or password")
-            # for incorrect username/password
-            if db_users.username_in_system(username) != username or db_users.get_password(username) != password:
-                return render_template('login.html', error = "Wrong username or password.")
     return render_template('login.html')
 
 # the webpage for creating stories
@@ -78,9 +85,8 @@ def edit(title):
 
 @app.route('/logout')
 def logout():
-    db_users.remove_user(session['username'])
     session.pop('username', None) # remove the username from the session if it's there
-    return render_template('login.html', error = "Successfully logged out.")
+    return render_template('login.html', error = "Logged out.")
 
 if __name__ == "__main__":
     app.debug = True 
