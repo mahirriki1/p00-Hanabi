@@ -1,5 +1,5 @@
 import sqlite3
-db = sqlite3.connect("articles.db")
+db = sqlite3.connect("articles.db", check_same_thread=False)
 global c
 c = db.cursor()
 #Method give you the data given if you already know another data and that data's datatype
@@ -50,6 +50,6 @@ def add_entry(story_name, newest_edit, user_id):
     c.execute(f'INSERT INTO "{story_name}" VALUES ({edit_id}, "{newest_edit}", {user_id})')
     #print(c.execute('SELECT * FROM main').fetchall())
     db.commit() #save changes
-    #db.close()  #close database
-add_entry('Hello_World', 'Welcome to the new worlda', 14)
+    db.close()  #close database
+#add_entry('Hello_World', 'Welcome to the new worlda', 14)
 
