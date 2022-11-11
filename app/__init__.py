@@ -36,6 +36,7 @@ def home():
                 # for blank username/password
                 if "" == username or "" == password:
                     return render_template('login.html', error = "Enter a username and/or password.")
+                # if the username is not found in the database, returns an error with username not in system
                 return render_template('login.html', error = "Username not in system.")
         # for registering
         elif request.form.get("sub0") == "register":
