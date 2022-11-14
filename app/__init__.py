@@ -31,7 +31,7 @@ def home():
                     print(session)
                     return render_template('home.html')
                 else:
-                    return render_template('login.html', error = "Wrong password.")
+                    return render_template('login.html', error = 'Wrong password.')
             # for blank username/password
             if "" == username or "" == password:
                 return render_template('login.html', error = "Enter a username and/or password.")
