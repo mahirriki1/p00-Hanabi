@@ -4,3 +4,4 @@ ravindraM -- 2022-11-10 3:30 PM: login.html COMPLETE --> sent to mahir for backe
 kevinL -- 2022-11-1:08 PM: Finished most of the methods required for app.py to access database and connect with html.
 mahirR -- 2022-11-09 3:28 PM: finished login commands with error messages
 kevinL -- 2022-13-9:10 PM: Change SQLite functions to parameteried Queries(For the ones containing VALUES)
+ravindraM -- 2022-11-14 12:40 PM : HTML sent to MAIN, awaiting inputs for JINJA
