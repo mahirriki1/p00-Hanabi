@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title> {{session['username'] + ' Stories'}} </title>
+  </head>
+
+  <body>
+    <p>
+      <form action="/logout">
+        <input type="submit" value="Logout"></input>
+      </form>
+      <form action="/home">
+        <input type="submit" value="Back"></input>
+      </form>
+    </p>
+
+    <h1>Hanabi - Powered by WeLoveTrees</h1>
+    <h3>Current Projects</h3>
+    <br>
+    <!-- RENDER PREVIEW-->
+    <button>See More</button>
+    <button>Mark as Complete</button>
+    <button>Create New</button>
+  
+  </body>
+
+</html>
