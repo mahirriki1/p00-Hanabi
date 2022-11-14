@@ -2,8 +2,8 @@ import sqlite3
 db = sqlite3.connect("users.db", check_same_thread=False)
 global c
 c = db.cursor()
-def _select_from(table, data_want, data_give, datatype_give):
-    temp = ((c.execute(f'SELECT {data_want} FROM {table} WHERE {datatype_give} ="{data_give}"')).fetchall())
+def _select_from(table, data_want, datagive, datatype_give):
+    temp = ((c.execute(f"SELECT {data_want} FROM {table} WHERE {datatype_give} = {datatype_give}")).fetchall())
     if(len(temp) > 0):
         return temp[0][0]
     else:
@@ -27,7 +27,7 @@ def signup(username, password):
     else:
         temp2 = c.execute(f'SELECT user_id FROM main').fetchall()
         user_id = len(temp2) + 1
-        c.execute(f'INSERT INTO main VALUES ({user_id}, "{username}", "{password}")')
+        c.execute("INSERT INTO main VALUES (?,?,?)", (user_id, username, password))
         c.execute(f'CREATE TABLE {username}(story_id INTEGER, edit_id INTEGER)')
     db.commit()
     return True #save changes
@@ -44,16 +44,18 @@ def get_id_from_username(username):
 def add_into_user_db(username, story_id, edit_id):
     user_id = get_id_from_username(username)
     if(username_in_system(username)):
-        c.execute(f'INSERT INTO {username} VALUES ({story_id}, {edit_id})')
+        print("achieved")
+        c.execute(f'INSERT INTO {username} VALUES (?, ?)',(story_id, edit_id))
+        print("done")
     db.commit() #save changes
     #db.close()  #close database
-def add_into_user_db(user_id, story_id, edit_id):
-    username = get_username_from_id(user_id)
-    if(username_in_system(username)):
-        c.execute(f'INSERT INTO {username} VALUES ({story_id}, {edit_id})')
-    db.commit() #save changes
-    #db.close()  #close database
-def get_list_of_stories(username):
+# def add_into_user_db(user_id, story_id, edit_id):
+#     username = get_username_from_id(user_id)
+#     if(username_in_system(username)):
+#         c.execute(f'INSERT INTO {username} VALUES ({story_id}, {edit_id})')
+#     db.commit() #save changes
+#     #db.close()  #close database
+# def get_list_of_stories(username):
     stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
     return stories
 
@@ -71,7 +73,13 @@ def remove_user(username):
     c.execute(f'DELETE FROM main WHERE username = "{username}"')
     db.commit() #save changes
     #db.close()  #close database
-
+#print(get_username_from_id(1))
+#c.execute("DROP TABLE")
 # print(c.execute('SELECT * FROM main').fetchall())
-# remove_user("Kevin")
-# print(c.execute('SELECT * FROM main').fetchall())
+signup("Kevin", "1234")
+print(c.execute('SELECT * FROM main').fetchall())
+# print(username_in_system("Kevin3"))
+# add_into_user_db("Kevin3", 1, 1)
+#print(c.execute('SELECT * FROM Kevin3').fetchall())
+# # remove_user("Kevin")
+# # print(c.execute('SELECT * FROM main').fetchall())
