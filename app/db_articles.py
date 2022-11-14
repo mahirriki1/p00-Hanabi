@@ -42,12 +42,13 @@ def add_entry(story_name, newest_edit, user_id):
     if(story_exist):
         pre_story = get_full_story(story_name)
     new_full = pre_story + " " + newest_edit
-    c.execute(f'INSERT OR REPLACE INTO main(story_id, story_name, full_story, most_recent, user_id) VALUES ({story_id}, "{story_name}", "{new_full}", "{newest_edit}", {user_id})')
+    c.execute(f'INSERT OR REPLACE INTO main(story_id, story_name, full_story, most_recent, user_id) VALUES (?,?,?,?,?)', (story_id, story_name, new_full, newest_edit, user_id))
     c.execute(f'CREATE TABLE if not exists "{story_name}"(edit_id INTEGER PRIMARY KEY, newest_edit TEXT, user_id INTEGER)')
     temp2 = c.execute(f'SELECT edit_id FROM {story_name}').fetchall()
     edit_id = len(temp2) + 1
     #print(c.execute(f'SELECT * FROM {story_name}').fetchall())
-    c.execute(f'INSERT INTO "{story_name}" VALUES ({edit_id}, "{newest_edit}", {user_id})')
+    #c.execute(f'INSERT INTO "{story_name}" VALUES ({edit_id}, "{newest_edit}", {user_id})')
+    c.execute(f'INSERT INTO "{story_name}" VALUES (?,?,?)', (edit_id, newest_edit, user_id))
     #print(c.execute('SELECT * FROM main').fetchall())
     db.commit() #save changes
     db.close()  #close database
