@@ -20,5 +20,5 @@ git clone git@github.com:mahirriki1/p00_Hanabi.git
 Run:
 
 ```python
-python3 app.py
+python3 __init__.py
 ```
