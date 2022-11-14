@@ -1,51 +1,19 @@
 <!DOCTYPE html>
     <head>
         <title>Hanabi - Login</title>
-        <link rel="icon" href="static/images/unknown.png">
-        <link rel="stylesheet" href="static/css/login.css">
     </head>
-    <body style="background-color: white; margin: 0px; height: 100vh; width: 100vw; overflow-x: hidden;">
+    <body>
         <p> {{error}} </p>
-        <div style="background-color: beige; height: 100%; width: 100%; display: flex; align-items: center;">
-            <div style="background-color: red; height: 96%; width: 98%; margin: auto;">
-                <div style="height: 15%; background-color: beige; display: flex; align-items: center;">
-                    <div style="height: 100%; width: 70%; background-color:beige; margin: auto; display: flex; align-items: center; justify-content: center;">
-                        <img src="static/images/logoish.png" style="height: 115px;">
-                    </div>
-                </div>
-                <div style="background-color: beige; height: 85%; display: flex; align-items: center;">
-                    <div style="background-color:brown; height: 95%; width: 80%; margin: auto;">
-                        <div style="background-color: #7DD0FC; height: 100%; width: 50%; float: left; display: flex; align-items: center;">
-                            <div style="background-color: white; height: 95%; width: 95%; margin: auto;">
-                                <form action="/home" method="post" style="margin-left: 4px;">
-                                    <h1 style="font-size: 300%;">Login</h1>
-                                    <h3 style="font-size: 200%; margin-bottom: 4%;">Username</h3>
-                                    <input class="auth" type="text" name="username">
-                                    <!-- <p style="color: red;">Username Not Found!</p> -->
-                                    <h3 style="font-size: 200%; margin-bottom: 4%;">Password</h3>
-                                    <input class="auth" type="text" name="password">
-                                    <!-- <p style="color: red;">Incorrect Password!</p> -->
-                                    <br>
-                                    <input class="auth" type="submit" name="sub0" value="login" style="margin-top: 13%;">
-                                </form>
-                            </div>
-                        </div>
-                        <div style="background-color: #B27FFE ; height: 100%; width: 50%; float: right; display: flex; align-items: center;">
-                            <div style="background-color: white; height: 95%; width: 95%; margin: auto;">
-                                <form action="/home" method="post" style="margin-left: 4px;">
-                                    <h1 style="font-size: 300%;">Register</h1>
-                                    <h3 style="font-size: 200%; margin-bottom: 4%;">New Username</h3>
-                                    <input class="auth" type="text" name="new_username">
-                                    <h3 style="font-size: 200%; margin-bottom: 4%;">New Password</h3>
-                                    <input class="auth" type="text" name="new_password">
-                                    <br>
-                                    <input class="auth" type="submit" name="sub0" value="register" style="margin-top: 13%;">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <form action="/home" method="post">
+            <h1>Login</h1>
+            <h3>Username</h3>
+            <input class="auth" type="text" name="username">
+            <!-- <p style="color: red;">Username Not Found!</p> -->
+            <h3>Password</h3>
+            <input class="auth" type="text" name="password">
+            <!-- <p style="color: red;">Incorrect Password!</p> -->
+            <br>
+            <input class="auth" type="submit" name="sub0" value="login">
+        </form>
     </body>
 </html>
