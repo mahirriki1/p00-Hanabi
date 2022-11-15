@@ -81,6 +81,6 @@ def get_list_of_stories(type):
         returnlist.append(x[0])
     return returnlist
 #add_entry('Story1', 'Avinda\'s board did not work.', 1, False)
-    # add_entry('Story3', 'Avinda\'s board did not work part 2.', 1, False)
+#add_entry('Story4', 'Avinda\'s board did not work part 2.', 1, False)
     # print(c.execute("SELECT * FROM main").fetchall())
     # addlike('Hello_World')
