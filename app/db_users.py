@@ -3,7 +3,7 @@ db = sqlite3.connect("users.db", check_same_thread=False)
 global c
 c = db.cursor()
 def _select_from(table, data_want, datagive, datatype_give):
-    temp = ((c.execute(f"SELECT {data_want} FROM {table} WHERE {datatype_give} = {datagive}")).fetchall())
+    temp = ((c.execute(f"SELECT {data_want} FROM {table} WHERE {datatype_give} = '{datagive}'")).fetchall())
     if(len(temp) > 0):
         return temp[0][0]
     else:
@@ -80,7 +80,7 @@ def remove_user(username):
 #print(get_username_from_id(1))
 #c.execute("DROP TABLE")
 # print(c.execute('SELECT * FROM main').fetchall())
-# signup("Kevin", "1234")
+signup("Kevin", "1234")
 # print(c.execute('SELECT * FROM main').fetchall())
 # print(username_in_system("Kevin3"))
 # add_into_user_db("Kevin3", 1, 1)

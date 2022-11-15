@@ -75,7 +75,7 @@ def addlike(story_name):
     c.execute(f'UPDATE main SET like = {current_like} WHERE story_name = "{story_name}"')
     db.commit()
 
-# add_entry('Story2', 'Avinda\'s board did not work.', 1, False)
-# add_entry('Story3', 'Avinda\'s board did not work part 2.', 1, False)
-# print(c.execute("SELECT * FROM main").fetchall())
-# addlike('Hello_World')
+add_entry('Story1', 'Avinda\'s board did not work.', 1, False)
+    # add_entry('Story3', 'Avinda\'s board did not work part 2.', 1, False)
+    # print(c.execute("SELECT * FROM main").fetchall())
+    # addlike('Hello_World')
