@@ -9,6 +9,7 @@
   <body>
     {{ error }}
     <p>
+      <h3>Logged in as {{session['username']}}</h3>
       <form action="/logout">
         <input type="submit" value="Logout"></input>
       </form>
@@ -20,12 +21,12 @@
     <h1>Hanabi - Powered by WeLoveTrees</h1>
     <h3>Creating Mode!</h3>
     <br>
-    <form action="/create_page" method="POST">
+    <form action="/create" method="POST">
       <label for="title">Title:</label>
       <input type="text" name="title" size="20"></input>
       <br><br>
       <label for="story">Story:</label>
-      <textarea name="story" placeholder="Edit the story here"></textarea>
+      <textarea name="story" placeholder="Create your story here..."></textarea>
       <input type="submit" value="Save"></input>
   </form>
 

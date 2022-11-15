@@ -3,6 +3,8 @@ import db_articles, db_users
 
 # account to use for test:
 # Kevin:1234
+# hello:lol
+# hi:hello
 
 app = Flask(__name__)
 # generated via terminal command: python3 -c 'import secrets; print(secrets.token_hex())'
@@ -80,6 +82,7 @@ def results():
         story_id.append(temp1)
     length = len(story_id)
     return render_template('results.html', leng = length, a = search_results, b = story_id)
+
 @app.route('/myStories', methods=['GET', 'POST'])
 def myStories():
     username = session['username']
@@ -100,6 +103,7 @@ def stories():
     # for x in range(0, len(story_names)):
     #     temp1 = 
     return render_template('popular.html', leng = length, a = story_names, b = story_id)
+
 # the webpage for creating stories
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -112,29 +116,28 @@ def create():
         # if successful, the code under runs and makes a story to the database
         else:
             db_articles.add_entry(title, story, db_users.get_id_from_username(session['username']), False)
-            return redirect('/home')
+            return redirect('/')
 
 # webpage for displaying stories
 @app.route('/<int:story_id>/', methods=['GET', 'POST'])
 def display(story_id):
     text = db_articles.get_full_story_id(story_id)
     title = db_articles.name_from_id(story_id)
-    return render_template( 'display.html', display = text, ARTICLE_TITLE=title)
+    return render_template( 'display.html', display = text, ARTICLE_TITLE=title, story_id=story_id)
 
 # webpage for editing stories
 @app.route('/<int:story_id>/edit/', methods=['GET', 'POST'])
-def edit(title):
-    story = db_articles.get_full_story(title)
+def edit(story_id):
+    title = db_articles.name_from_id(story_id)
     if request.method == 'POST':
-        title = request.form['title']
-        edit = request.form['edit']
-        if not title:
-            flash('Title needed.')
-        elif not edit:
-            flash('Edit needed.')
+        edit = request.form['story']
+        # for blank text
+        if "" == edit:
+            return render_template('edit.html', error = "Enter an edit.")
         else:
-            db_articles.add_entry(title, edit, session['username'])
-    return render_template('create.html')
+            db_articles.add_entry(title, edit, db_users.get_id_from_username(session['username']), True)
+            return redirect('/')
+    return render_template('edit.html', title = title, story_id = story_id)
 
 @app.route('/logout')
 def logout():

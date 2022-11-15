@@ -12,7 +12,7 @@
       <form action="/logout">
         <input type="submit" value="Logout"></input>
       </form>
-			<form action="/home">
+			<form action="/">
         <input type="submit" value="Back"></input>
       </form>
     </p>
@@ -20,12 +20,11 @@
     <h1>Hanabi - Powered by WeLoveTrees</h1>
     <h3>Editing Mode!</h3>
     <br>
-    <form action="/display">
-			  <label for="title">Title:</label>
-        <input type="text" name="title" size="20"></input>
+    <form action="/{{story_id}}/edit/" method="POST">
+			  <p>Title: <b>{{title}}</b>
     		<br>
-				<label for="story">Story:</label>
-        <textarea name="story" placeholder="Create a story here..."></textarea>
+				<label for="story">Story Edit:</label>
+        <textarea name="story" placeholder="Edit the story here..."></textarea>
         <input type="submit" value="Save"></input>
     </form>
 

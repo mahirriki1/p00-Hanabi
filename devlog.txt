@@ -1,3 +1,22 @@
+WeLoveTrees
+Mahir Riki
+Ravindra Mangar
+Kevin Liu
+pd 7
+---------------------
+<Project Title/Description>
+
+
+ ______   ______   __   __   __       ______   _______     
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+==============================================================
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 ravindraM -- 2022-11-03 08:11 : Clearer explanation of part components, descriptions of the mechanisms we plan to use in order to split up the work without causing significant merge errors.
 mahirR -- 2022-11-07 02:31 AM : edited app.py so the database commands would be imported and used
 ravindraM -- 2022-11-10 3:30 PM: login.html COMPLETE --> sent to mahir for backend
@@ -9,3 +28,4 @@ kevinL -- 2022-11-13 9:10 PM: Change SQLite functions to parameteried Queries(Fo
 mahirR -- 2022-11-13 10:02 PM: worked on the home page functions and buttons
 ravindraM -- 2022-11-14 12:40 PM : HTML sent to MAIN, awaiting inputs for JINJA
 kevinL -- 2022-11-15 12:28AM: Worked on the projects page, search results, display, and display all story pages. Added some database functions such as ones for a like button(never used)
+mahirR -- 2022-11-15 2:35 AM: create and edit functions are completed; removed the like buttom from display since it was not used

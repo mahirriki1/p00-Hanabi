@@ -9,7 +9,7 @@
       <form action="/logout">
         <input type="submit" value="Logout"></input>
       </form>
-      <form action="/">
+      <form action="/stories">
         <input type="submit" value="Back"></input>
       </form>
     </p>
@@ -18,9 +18,9 @@
     <h3>{{ ARTICLE_TITLE }}</h3>
     <br>
     <p>{{ display }}</p>
-
-    <form action="/like"></form>
-      <input type="submit" name="like"> <!-- THE TEXT BOX FOR WRITING (idt we can make it bigger w/o css oops)-->
+    <br>
+    <form action="/{{story_id}}/edit/">
+      <input type="submit" value="Edit"></input>
     </form>
  
   </body>
