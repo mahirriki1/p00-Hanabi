@@ -61,6 +61,15 @@ def random():
     id = db_articles.get_random_article()
     return redirect(f'/{id}/', code=302)
 
+@app.route('/stories', methods=['GET', 'POST'])
+def stories():
+    story_names = db_articles.get_list_of_stories('story_name')
+    story_id = db_articles.get_list_of_stories('story_id')
+    length = len(story_names)
+    # composition = []
+    # for x in range(0, len(story_names)):
+    #     temp1 = 
+    return render_template('popular.html', leng = length, a = story_names, b = story_id)
 # the webpage for creating stories
 @app.route('/create', methods=['GET', 'POST'])
 def create():
