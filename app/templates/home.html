@@ -8,10 +8,26 @@
 
   <body>
     <p>
-      User: {{session['username']}}
       <form action="/logout">
         <input type="submit" value="Logout"></input>
-      </p>
+      </form>
+    </p>
+
+    <h1>Hanabi - Powered by WeLoveTrees</h1>
+    <br>
+    <button>My Stories</button>
+    <form action="/create">
+      <input type="submit" value="New Story"></input>
+    </form>
+    <button>My Stories</button>
+    <form action="/random">
+      <input type="submit" value="Random"></input>
+    </form>
+    <button>Most Popular</button>
+    <br>
+    <br>
+    <h3>Search for existing stories here!</h3>
+    <input type="text" name="search">
   
   </body>
 

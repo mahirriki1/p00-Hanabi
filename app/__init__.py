@@ -1,9 +1,8 @@
-from flask import Flask, request, render_template, session, flash
+from flask import Flask, request, render_template, session, flash, redirect
 import db_articles, db_users
 
 # made two accounts for testing:
 # hi: hii
-# hello: lol
 
 app = Flask(__name__)
 # generated via terminal command: python3 -c 'import secrets; print(secrets.token_hex())'
@@ -56,6 +55,12 @@ def home():
                 return render_template('home.html')
     return render_template('login.html')
 
+#give route to a random story
+@app.route('/random', methods=['GET', 'POST'])
+def random():
+    id = db_articles.get_random_article()
+    return redirect(f'/{id}/', code=302)
+
 # the webpage for creating stories
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -74,9 +79,11 @@ def create():
 
 # TODO: add a way to display stories
 # webpage for displaying stories
-@app.route('/<int:story_id>', methods=['GET', 'POST'])
-def project():
-    return render_template('projects.html')
+@app.route('/<int:story_id>/', methods=['GET', 'POST'])
+def display(story_id):
+    text = db_articles.get_full_story_id(story_id)
+    title = db_articles.name_from_id(story_id)
+    return render_template( 'display.html', display = text, ARTICLE_TITLE=title)
 
 # webpage for editing stories
 @app.route('/<int:story_id>/edit/', methods=['GET', 'POST'])

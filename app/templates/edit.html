@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title> EDITING MODE </title>
+  </head>
+
+  <body>
+    <p>
+			{{error}}
+      <form action="/logout">
+        <input type="submit" value="Logout"></input>
+      </form>
+			<form action="/home">
+        <input type="submit" value="Back"></input>
+      </form>
+    </p>
+
+    <h1>Hanabi - Powered by WeLoveTrees</h1>
+    <h3>Editing Mode!</h3>
+    <br>
+    <form action="/display">
+			  <label for="title">Title:</label>
+        <input type="text" name="title" size="20"></input>
+    		<br>
+				<label for="story">Story:</label>
+        <input type="text" name="story" size="90"></input>
+        <input type="submit" value="Save"></input>
+    </form>
+
+  </body>
+
+</html>
