@@ -1,4 +1,5 @@
 import sqlite3
+import random as random
 db = sqlite3.connect("articles.db", check_same_thread=False)
 global c
 c = db.cursor()
@@ -22,9 +23,13 @@ def _select_from_main(data_want, data_give, datatype_give):
 #get the full story with name
 def get_full_story(story_name):
     return _select_from_main('full_story', story_name, 'story_name')
+def get_full_story_id(story_id):
+    return _select_from_main('full_story', story_id, 'story_id')
 def get_newest_edit(story_name):
     return _select_from_main('most_recent', story_name, 'story_name')
-#def get_all_story(user_id):
+
+def name_from_id(story_id):
+    return _select_from_main('story_name', story_id, 'story_id')
 
 
 #new_entry is a boolean, true if the entry is an edit, false if the entry is a new entry
@@ -56,11 +61,17 @@ def add_entry(story_name, newest_edit, user_id, edit):
     db.commit() #save changes
     return 1
     #db.close()  #close database
+def get_random_article():
+    temp1 = c.execute("SELECT story_id FROM main").fetchall()
+    num = random.randint(0, len(temp1) - 1)
+    return temp1[num][0]
 def addlike(story_name):
     current_like = _select_from_main("like", story_name, 'story_name')
     current_like = current_like + 1
     c.execute(f'UPDATE main SET like = {current_like} WHERE story_name = "{story_name}"')
     db.commit()
-add_entry('Hello_World', 'Welcome to the new worl', 14, True)
-print(c.execute("SELECT * FROM main").fetchall())
-addlike('Hello_World')
+
+add_entry('Story2', 'Avinda\'s board did not work.', 1, False)
+# print(c.execute("SELECT * FROM main").fetchall())
+# addlike('Hello_World')
+print(get_random_article())
