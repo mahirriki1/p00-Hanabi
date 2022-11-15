@@ -23,9 +23,16 @@
     <form action="/{{story_id}}/edit/" method="POST">
 			  <p>Title: <b>{{title}}</b>
     		<br>
-				<label for="story">Story Edit:</label>
-        <textarea name="story" placeholder="Edit the story here..."></textarea>
-        <input type="submit" value="Save"></input>
+          Here is the previous addition:
+          <br>
+          <br>
+          {{prev}}
+          <br>
+        {% if not edited %}
+          <label for="story">Story Addition:</label>
+          <textarea name="story" placeholder="Add to the story here..."></textarea>
+          <input type="submit" value="Save"></input>
+        {% endif %}
     </form>
 
   </body>

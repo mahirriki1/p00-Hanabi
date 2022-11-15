@@ -2,6 +2,7 @@ import sqlite3
 db = sqlite3.connect("users.db", check_same_thread=False)
 global c
 c = db.cursor()
+c.execute("CREATE TABLE if not exists main(user_id INTEGER PRIMARY KEY, username TEXT, password TEXT)")
 def _select_from(table, data_want, datagive, datatype_give):
     temp = ((c.execute(f"SELECT {data_want} FROM {table} WHERE {datatype_give} = '{datagive}'")).fetchall())
     if(len(temp) > 0):

@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, session, redirect
 import db_articles, db_users
-
+import random as ran
 # account to use for test:
 # Kevin:1234
 # hello:lol
@@ -62,7 +62,19 @@ def home():
 def random():
     id = db_articles.get_random_article()
     return redirect(f'/{id}/', code=302)
-
+@app.route('/random_edit', methods=['GET', 'POST'])
+def random_edit():
+    id_list = db_articles.get_list_of_stories('story_id')
+    username = session['username']
+    story_id = db_users.get_list_of_stories(username, 'story_id')
+    for element in id_list:
+        if element in story_id:
+            id_list.remove(element)
+    if(len(id_list) == 0):
+        return render_template('home.html', error = "No story to edit")
+    num = ran.randint(0, len(id_list)-1)
+    id = id_list[num]
+    return redirect(f'/{id}/edit/', code=302)
 # return the create story page
 @app.route('/create_page', methods=['GET', 'POST'])
 def create_page():
@@ -128,7 +140,13 @@ def display(story_id):
 # webpage for editing stories
 @app.route('/<int:story_id>/edit/', methods=['GET', 'POST'])
 def edit(story_id):
+    username = session['username']
+    stories = db_users.get_list_of_stories(username, 'story_id')
+    story_name = db_articles.name_from_id(story_id)
+    Prev = db_articles.get_newest_edit(story_name)
     title = db_articles.name_from_id(story_id)
+    edited = story_id in stories
+    print(edited)
     if request.method == 'POST':
         edit = request.form['story']
         # for blank text
@@ -137,7 +155,7 @@ def edit(story_id):
         else:
             db_articles.add_entry(title, edit, db_users.get_id_from_username(session['username']), True)
             return redirect('/')
-    return render_template('edit.html', title = title, story_id = story_id)
+    return render_template('edit.html', prev = Prev, title = title, story_id = story_id, edited = edited)
 
 @app.route('/logout')
 def logout():

@@ -4,6 +4,8 @@ import db_users
 db = sqlite3.connect("articles.db", check_same_thread=False)
 global c
 c = db.cursor()
+c.execute("CREATE TABLE if not exists main(story_id INTEGER PRIMARY KEY, story_name TEXT, full_story TEXT, most_recent TEXT, user_id INTEGER, like INTEGER)")
+
 #Method give you the data given if you already know another data and that data's datatype
 #IE: If I want the story_id and I know that the user_id is 20. We can call
 #select_from_main(story_id, 20, user_id), which will give us the story_id of that row
