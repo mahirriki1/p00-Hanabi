@@ -4,7 +4,7 @@ Ravindra Mangar
 Kevin Liu
 pd 7
 ---------------------
-<Project Title/Description>
+A storytelling website showcasing stories submitted by people which are allowed edits by others.
 
 
  ______   ______   __   __   __       ______   _______     
