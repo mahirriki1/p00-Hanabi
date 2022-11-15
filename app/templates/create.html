@@ -10,22 +10,23 @@
     <p>
       <form action="/logout">
         <input type="submit" value="Logout"></input>
-        <input type="submit" value="Back"></input>
+      </form>
+        <form action="/home">
+          <input type="submit" value="Back"></input>
       </form>
     </p>
 
     <h1>Hanabi - Powered by WeLoveTrees</h1>
     <h3>Creating Mode!</h3>
     <br>
-    <!-- Idk what u guys have but if you want to render only ongoing or only completed stories too go for it-->
-    <form action="/placeholder">
-        <input type="text" value="STORY NAME" size=20></input>
-    </form>
-    <br>
-    <form action="/placeholder">
-        <input type="text" value="STORY TEXT" size=90></input>
-        <input type="submit" value="Save"></input>
-    </form>
+    <form action="/create" method="POST">
+      <label for="title">Title:</label>
+      <input type="text" name="title" size="20"></input>
+      <br><br>
+      <label for="story">Story:</label>
+      <textarea name="story" placeholder="Create a story here..."></textarea>
+      <input type="submit" value="Save"></input>
+  </form>
 
   </body>
 

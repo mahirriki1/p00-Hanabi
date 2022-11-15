@@ -1,22 +1,17 @@
-from flask import Flask, request, render_template, session, flash, redirect
+from flask import Flask, request, render_template, session, redirect
 import db_articles, db_users
 
-# made two accounts for testing:
-# hi: hii
+# account to use for test:
+# Kevin:1234
 
 app = Flask(__name__)
 # generated via terminal command: python3 -c 'import secrets; print(secrets.token_hex())'
 app.secret_key = 'b52635eab6be8ca4c07bd65adc04b27d11a8e251b1e3d16825b881497b1c7af1'
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def login():
-    if 'username' in session:
+    if ('username' in session) and db_users.username_in_system(session['username']):
         return render_template('home.html')
-    return render_template('login.html')
-
-# the home page; if the user is not logged in, redirect to login page
-@app.route('/home', methods=['GET', 'POST'])
-def home():
     if request.method == 'POST':
         # for logging in
         if request.form.get("sub0") == "login":
@@ -55,26 +50,35 @@ def home():
                 return render_template('home.html')
     return render_template('login.html')
 
+# the home page; if the user is not logged in, redirect to login page
+@app.route('/home', methods=['GET', 'POST'])
+def home():
+    return render_template('home.html')
+
 #give route to a random story
 @app.route('/random', methods=['GET', 'POST'])
 def random():
     id = db_articles.get_random_article()
     return redirect(f'/{id}/', code=302)
 
+# return the create story page
+@app.route('/create_page', methods=['GET', 'POST'])
+def create_page():
+    return render_template('create.html')
+
 # the webpage for creating stories
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    username = session['username']
-    # if request.method == 'POST':
-    #     title = request.form['title']
-    #     content = request.form['content']
-    #     if not title:
-    #         flash('Title needed.')
-    #     elif not content:
-    #         flash('Content needed.')
-    #     else:
-    #         db_articles.add_entry(title, content, username)
-    #         return render_template('display.html') # TODO: change this to an added story screen or smth
+    if request.method == 'POST':
+        title = request.form['title']
+        text = request.form['text']
+        # for blank title/text
+        if "" == title or "" == text:
+            return render_template('create.html', error = "Enter a title and/or text.")
+        # if successful, the code under runs and makes a story to the database
+        else:
+            db_articles.create_article(title, text)
+            return render_template('home.html')
     return render_template('create.html')
 
 # webpage for displaying stories
