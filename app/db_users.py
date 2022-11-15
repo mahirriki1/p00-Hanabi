@@ -71,6 +71,7 @@ def change_password(username, new_password):
 
 def remove_user(username):
     c.execute(f'DELETE FROM main WHERE username = "{username}"')
+    c.execute(f'DROP TABLE {username}')
     db.commit() #save changes
     #db.close()  #close database
 #print(get_username_from_id(1))
