@@ -58,7 +58,7 @@ def add_into_user_db(username, story_id, edit_id):
 # def get_list_of_stories(username):
     stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
     return stories
-
+#returns a list of all stories_id the user has edited
 def get_list_of_stories(user_id):
     username = get_username_from_id(user_id)
     stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
