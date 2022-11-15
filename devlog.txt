@@ -8,3 +8,4 @@ ravindraM -- 2022-11-14 12:40 PM : HTML sent to MAIN, awaiting inputs for JINJA
 kevinL -- 2022-11-13 9:10 PM: Change SQLite functions to parameteried Queries(For the ones containing VALUES)
 mahirR -- 2022-11-13 10:02 PM: worked on the home page functions and buttons
 ravindraM -- 2022-11-14 12:40 PM : HTML sent to MAIN, awaiting inputs for JINJA
+kevinL -- 2022-11-15 12:28AM: Worked on the projects page, search results, display, and display all story pages. Added some database functions such as ones for a like button(never used)
