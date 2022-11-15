@@ -15,7 +15,7 @@ def login():
     return render_template('login.html')
 
 # the home page; if the user is not logged in, redirect to login page
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         # for logging in
