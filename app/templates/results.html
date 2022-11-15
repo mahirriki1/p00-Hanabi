@@ -10,12 +10,24 @@
     <p>
       <form action="/logout">
         <input type="submit" value="Logout"></input>
+      </form>
+      <form action="/">
         <input type="submit" value="Back"></input>
       </form>
     </p>
 
     <h1>Hanabi - Powered by WeLoveTrees</h1>
     <h3>SEARCH RESULTS</h3>
+    <p>
+      {% for elements in range(0, leng)%}
+      {{a[elements]}}
+      <form action=/{{b[elements]}}>
+        <input type="submit" value="Go to Story"></input>
+      </form>
+      <br>
+      <br>
+    {% endfor %}
+    </p>
     <br>
     <!-- RENDER SEARCH RESULTS FROM HOME.HTML -->
   

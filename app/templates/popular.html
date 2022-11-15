@@ -3,20 +3,32 @@
 <html>
 
   <head>
-    <title> POPULAR </title>
+    <title> LIST OF STORIES </title>
   </head>
 
   <body>
     <p>
       <form action="/logout">
         <input type="submit" value="Logout"></input>
+      </form>
+      <form action="/">
         <input type="submit" value="Back"></input>
       </form>
     </p>
 
     <h1>Hanabi - Powered by WeLoveTrees</h1>
-    <h3>Most Popular! (Ongoing and Completed)</h3>
+    <h3>List of all Stories! (Ongoing and Completed)</h3>
     <br>
+    <p>
+      {% for elements in range(0, leng)%}
+      {{a[elements]}}
+      <form action=/{{b[elements]}}>
+        <input type="submit" value="Go to Story"></input>
+      </form>
+      <br>
+      <br>
+    {% endfor %}
+    </p>
     <!-- Idk what u guys have but if you want to render only ongoing or only completed stories too go for it-->
   
   </body>

@@ -16,24 +16,23 @@
 
     <h1 align="center">Hanabi - Powered by WeLoveTrees</h1>
     <br>
-    <form action="/display">
-      <button type="submit">My Stories</button>
+    <form action="/create">
+      <input type="submit" value="New Story"></input>
     </form>
-    <form action="/create_page">
-      <button type="submit">New Story</button>
-    </form>
-    <form action="/display">
-      <button>My Stories</button>
+    <form action="/myStories">
+      <input type="submit" value="myStories"></input>
     </form>
     <form action="/random">
       <button type="submit">Random</button>
     </form>
-    <form action="/placeholder">
-      <button type="submit">Most Popular</button>
+    <form action="/stories">
+      <input type="submit" value="List of stories"></input>
+    </form>
     <br>
     <br>
     <h3>Search for existing stories here!</h3>
-    <input type="text" name="search">
+    <form action="/results" method="post">
+      <input type="text" name="search">
   
   </body>
 
