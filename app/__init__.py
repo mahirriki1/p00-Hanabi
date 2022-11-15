@@ -10,8 +10,13 @@ app.secret_key = 'b52635eab6be8ca4c07bd65adc04b27d11a8e251b1e3d16825b881497b1c7a
 
 @app.route("/", methods=['GET', 'POST'])
 def login():
-    if ('username' in session) and db_users.username_in_system(session['username']):
+    if 'username' in session:
         return render_template('home.html')
+    return render_template('login.html')
+
+# the home page; if the user is not logged in, redirect to login page
+@app.route('/login', methods=['GET', 'POST'])
+def home():
     if request.method == 'POST':
         # for logging in
         if request.form.get("sub0") == "login":
@@ -50,11 +55,6 @@ def login():
                 return render_template('home.html')
     return render_template('login.html')
 
-# the home page; if the user is not logged in, redirect to login page
-@app.route('/home', methods=['GET', 'POST'])
-def home():
-    return render_template('home.html')
-
 #give route to a random story
 @app.route('/random', methods=['GET', 'POST'])
 def random():
@@ -71,15 +71,14 @@ def create_page():
 def create():
     if request.method == 'POST':
         title = request.form['title']
-        text = request.form['text']
+        story = request.form['story']
         # for blank title/text
-        if "" == title or "" == text:
+        if "" == title or "" == story:
             return render_template('create.html', error = "Enter a title and/or text.")
         # if successful, the code under runs and makes a story to the database
         else:
-            db_articles.create_article(title, text)
-            return render_template('home.html')
-    return render_template('create.html')
+            db_articles.add_entry(title, story, db_users.get_id_from_username(session['username']), False)
+            return redirect('/home')
 
 # webpage for displaying stories
 @app.route('/<int:story_id>/', methods=['GET', 'POST'])
@@ -92,15 +91,15 @@ def display(story_id):
 @app.route('/<int:story_id>/edit/', methods=['GET', 'POST'])
 def edit(title):
     story = db_articles.get_full_story(title)
-    # if request.method == 'POST':
-    #     title = request.form['title']
-    #     edit = request.form['edit']
-    #     if not title:
-    #         flash('Title needed.')
-    #     elif not edit:
-    #         flash('Edit needed.')
-    #     else:
-    #         db_articles.add_entry(title, edit, session['username'])
+    if request.method == 'POST':
+        title = request.form['title']
+        edit = request.form['edit']
+        if not title:
+            flash('Title needed.')
+        elif not edit:
+            flash('Edit needed.')
+        else:
+            db_articles.add_entry(title, edit, session['username'])
     return render_template('create.html')
 
 @app.route('/logout')
