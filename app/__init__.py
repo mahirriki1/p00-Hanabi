@@ -61,6 +61,20 @@ def random():
     id = db_articles.get_random_article()
     return redirect(f'/{id}/', code=302)
 
+@app.route('/results', methods=['GET', 'POST'])
+def results():
+    story_names = db_articles.get_list_of_stories('story_name')
+    text = request.form['search']
+    search_results = []
+    story_id = []
+    for elements in story_names:
+        if(text in elements):
+            search_results.append(elements)
+    for x in search_results:
+        temp1 = db_articles.id_from_name(x)
+        story_id.append(temp1)
+    length = len(story_id)
+    return render_template('results.html', leng = length, a = search_results, b = story_id)
 @app.route('/myStories', methods=['GET', 'POST'])
 def myStories():
     username = session['username']

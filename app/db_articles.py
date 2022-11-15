@@ -32,6 +32,8 @@ def get_newest_edit(story_name):
 def name_from_id(story_id):
     return _select_from_main('story_name', story_id, 'story_id')
 
+def id_from_name(story_name):
+    return _select_from_main('story_id', story_name, 'story_name')
 
 #new_entry is a boolean, true if the entry is an edit, false if the entry is a new entry
 def add_entry(story_name, newest_edit, user_id, edit):
