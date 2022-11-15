@@ -5,3 +5,6 @@ kevinL -- 2022-11-1:08 PM: Finished most of the methods required for app.py to a
 mahirR -- 2022-11-09 3:28 PM: finished login commands with error messages
 kevinL -- 2022-13-9:10 PM: Change SQLite functions to parameteried Queries(For the ones containing VALUES)
 ravindraM -- 2022-11-14 12:40 PM : HTML sent to MAIN, awaiting inputs for JINJA
+kevinL -- 2022-11-13 9:10 PM: Change SQLite functions to parameteried Queries(For the ones containing VALUES)
+mahirR -- 2022-11-13 10:02 PM: worked on the home page functions and buttons
+ravindraM -- 2022-11-14 12:40 PM : HTML sent to MAIN, awaiting inputs for JINJA

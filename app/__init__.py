@@ -3,7 +3,6 @@ import db_articles, db_users
 
 # made two accounts for testing:
 # hi: hii
-# hello: lol
 
 app = Flask(__name__)
 # generated via terminal command: python3 -c 'import secrets; print(secrets.token_hex())'
@@ -78,7 +77,6 @@ def create():
     #         return render_template('display.html') # TODO: change this to an added story screen or smth
     return render_template('create.html')
 
-# TODO: add a way to display stories
 # webpage for displaying stories
 @app.route('/<int:story_id>/', methods=['GET', 'POST'])
 def display(story_id):
