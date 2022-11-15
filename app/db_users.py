@@ -3,7 +3,7 @@ db = sqlite3.connect("users.db", check_same_thread=False)
 global c
 c = db.cursor()
 def _select_from(table, data_want, datagive, datatype_give):
-    temp = ((c.execute(f"SELECT {data_want} FROM {table} WHERE {datatype_give} = {datatype_give}")).fetchall())
+    temp = ((c.execute(f"SELECT {data_want} FROM {table} WHERE {datatype_give} = {datagive}")).fetchall())
     if(len(temp) > 0):
         return temp[0][0]
     else:
@@ -62,7 +62,10 @@ def add_into_user_db(username, story_id, edit_id):
 def get_list_of_stories(user_id):
     username = get_username_from_id(user_id)
     stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
-    return stories[0]
+    returnlist = []
+    for x in stories:
+        returnlist.append(x[0])
+    return returnlist
 
 def change_password(username, new_password):
     c.execute(f'UPDATE main SET password = "{new_password}" WHERE username = "{username}"')
@@ -77,8 +80,9 @@ def remove_user(username):
 #print(get_username_from_id(1))
 #c.execute("DROP TABLE")
 # print(c.execute('SELECT * FROM main').fetchall())
-signup("Kevin", "1234")
-# print(c.execute('SELECT * FROM main').fetchall())
+signup("User1", "1234")
+print(get_list_of_stories(2))
+print(c.execute('SELECT * FROM main').fetchall())
 # print(username_in_system("Kevin3"))
 # add_into_user_db("Kevin3", 1, 1)
 #print(c.execute('SELECT * FROM Kevin3').fetchall())

@@ -1,5 +1,6 @@
 import sqlite3
 import random as random
+import db_users
 db = sqlite3.connect("articles.db", check_same_thread=False)
 global c
 c = db.cursor()
@@ -57,6 +58,8 @@ def add_entry(story_name, newest_edit, user_id, edit):
     #print(c.execute(f'SELECT * FROM {story_name}').fetchall())
     #c.execute(f'INSERT INTO "{story_name}" VALUES ({edit_id}, "{newest_edit}", {user_id})')
     c.execute(f'INSERT INTO "{story_name}" VALUES (?,?,?)', (edit_id, newest_edit, user_id))
+    username = db_users.get_username_from_id(user_id)
+    db_users.add_into_user_db(username, story_id, edit_id)
     #print(c.execute('SELECT * FROM main').fetchall())
     db.commit() #save changes
     return 1
@@ -65,13 +68,14 @@ def get_random_article():
     temp1 = c.execute("SELECT story_id FROM main").fetchall()
     num = random.randint(0, len(temp1) - 1)
     return temp1[num][0]
+
 def addlike(story_name):
     current_like = _select_from_main("like", story_name, 'story_name')
     current_like = current_like + 1
     c.execute(f'UPDATE main SET like = {current_like} WHERE story_name = "{story_name}"')
     db.commit()
 
-add_entry('Story2', 'Avinda\'s board did not work.', 1, False)
+# add_entry('Story2', 'Avinda\'s board did not work.', 1, False)
+# add_entry('Story3', 'Avinda\'s board did not work part 2.', 1, False)
 # print(c.execute("SELECT * FROM main").fetchall())
 # addlike('Hello_World')
-print(get_random_article())
