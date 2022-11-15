@@ -77,7 +77,6 @@ def create():
     #         return render_template('display.html') # TODO: change this to an added story screen or smth
     return render_template('create.html')
 
-# TODO: add a way to display stories
 # webpage for displaying stories
 @app.route('/<int:story_id>/', methods=['GET', 'POST'])
 def display(story_id):
