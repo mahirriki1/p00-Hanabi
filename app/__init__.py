@@ -3,7 +3,6 @@ import db_articles, db_users
 
 # made two accounts for testing:
 # hi: hii
-# hello: lol
 
 app = Flask(__name__)
 # generated via terminal command: python3 -c 'import secrets; print(secrets.token_hex())'

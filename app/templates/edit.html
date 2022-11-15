@@ -8,8 +8,11 @@
 
   <body>
     <p>
+			{{error}}
       <form action="/logout">
         <input type="submit" value="Logout"></input>
+      </form>
+			<form action="/home">
         <input type="submit" value="Back"></input>
       </form>
     </p>
@@ -17,13 +20,12 @@
     <h1>Hanabi - Powered by WeLoveTrees</h1>
     <h3>Editing Mode!</h3>
     <br>
-    <!-- Idk what u guys have but if you want to render only ongoing or only completed stories too go for it-->
-
-    <h2>STORY NAME</h2>
-
-    <br>
-    <form action="/placeholder">
-        <input type="text" value="STORY TEXT" size=90></input>
+    <form action="/display">
+			  <label for="title">Title:</label>
+        <input type="text" name="title" size="20"></input>
+    		<br>
+				<label for="story">Story:</label>
+        <input type="text" name="story" size="90"></input>
         <input type="submit" value="Save"></input>
     </form>
 
