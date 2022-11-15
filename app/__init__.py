@@ -66,6 +66,40 @@ def random():
 def create_page():
     return render_template('create.html')
 
+@app.route('/results', methods=['GET', 'POST'])
+def results():
+    story_names = db_articles.get_list_of_stories('story_name')
+    text = request.form['search']
+    search_results = []
+    story_id = []
+    for elements in story_names:
+        if(text in elements):
+            search_results.append(elements)
+    for x in search_results:
+        temp1 = db_articles.id_from_name(x)
+        story_id.append(temp1)
+    length = len(story_id)
+    return render_template('results.html', leng = length, a = search_results, b = story_id)
+@app.route('/myStories', methods=['GET', 'POST'])
+def myStories():
+    username = session['username']
+    story_id = db_users.get_list_of_stories(username, 'story_id')
+    story_names = []
+    for x in story_id:
+        temp1 = db_articles.name_from_id(x)
+        story_names.append(temp1)
+    length = len(story_names)
+    return render_template('projects.html', leng = length, a = story_names, b = story_id)
+
+@app.route('/stories', methods=['GET', 'POST'])
+def stories():
+    story_names = db_articles.get_list_of_stories('story_name')
+    story_id = db_articles.get_list_of_stories('story_id')
+    length = len(story_names)
+    # composition = []
+    # for x in range(0, len(story_names)):
+    #     temp1 = 
+    return render_template('popular.html', leng = length, a = story_names, b = story_id)
 # the webpage for creating stories
 @app.route('/create', methods=['GET', 'POST'])
 def create():

@@ -59,9 +59,8 @@ def add_into_user_db(username, story_id, edit_id):
     stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
     return stories
 #returns a list of all stories_id the user has edited
-def get_list_of_stories(user_id):
-    username = get_username_from_id(user_id)
-    stories = list(c.execute(f'SELECT story_id FROM {username}').fetchall())
+def get_list_of_stories(username, type):
+    stories = list(c.execute(f'SELECT {type} FROM {username}').fetchall())
     returnlist = []
     for x in stories:
         returnlist.append(x[0])
@@ -79,11 +78,11 @@ def remove_user(username):
     #db.close()  #close database
 #print(get_username_from_id(1))
 #c.execute("DROP TABLE")
-# print(c.execute('SELECT * FROM main').fetchall())
-signup("Kevin", "1234")
+#print(c.execute('SELECT * FROM main').fetchall())
+#signup("Kevin", "1234")
 # print(c.execute('SELECT * FROM main').fetchall())
 # print(username_in_system("Kevin3"))
 # add_into_user_db("Kevin3", 1, 1)
 #print(c.execute('SELECT * FROM Kevin3').fetchall())
 # # remove_user("Kevin")
-# # print(c.execute('SELECT * FROM main').fetchall())
+#print(c.execute('SELECT * FROM main').fetchall())

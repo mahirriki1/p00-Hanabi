@@ -10,6 +10,8 @@
     <p>
       <form action="/logout">
         <input type="submit" value="Logout"></input>
+      </form>
+      <form action="/">
         <input type="submit" value="Back"></input>
       </form>
     </p>
@@ -18,10 +20,16 @@
     <h3>Current Projects</h3>
     <br>
     <!-- RENDER PREVIEW-->
-    <button>See More</button>
-    <button>Mark as Complete</button>
-    <button>Create New</button> <!--IF STORY IS NOT COMPLETED, RENDER A TEXT BOX-->
-  
+    <p>
+      {% for elements in range(0, leng)%}
+      {{a[elements]}}
+      <form action=/{{b[elements]}}>
+        <input type="submit" value="Go to Story"></input>
+      </form>
+      <br>
+      <br>
+    {% endfor %}
+    </p>
   </body>
 
 </html>

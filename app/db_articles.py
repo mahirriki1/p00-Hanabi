@@ -32,6 +32,8 @@ def get_newest_edit(story_name):
 def name_from_id(story_id):
     return _select_from_main('story_name', story_id, 'story_id')
 
+def id_from_name(story_name):
+    return _select_from_main('story_id', story_name, 'story_name')
 
 #new_entry is a boolean, true if the entry is an edit, false if the entry is a new entry
 def add_entry(story_name, newest_edit, user_id, edit):
@@ -74,8 +76,13 @@ def addlike(story_name):
     current_like = current_like + 1
     c.execute(f'UPDATE main SET like = {current_like} WHERE story_name = "{story_name}"')
     db.commit()
-
-add_entry('Story1', 'Avinda\'s board did not work.', 1, False)
-    # add_entry('Story3', 'Avinda\'s board did not work part 2.', 1, False)
+def get_list_of_stories(type):
+    stories = list(c.execute(f'SELECT {type} FROM main').fetchall())
+    returnlist = []
+    for x in stories:
+        returnlist.append(x[0])
+    return returnlist
+#add_entry('Story1', 'Avinda\'s board did not work.', 1, False)
+#add_entry('Story4', 'Avinda\'s board did not work part 2.', 1, False)
     # print(c.execute("SELECT * FROM main").fetchall())
     # addlike('Hello_World')
