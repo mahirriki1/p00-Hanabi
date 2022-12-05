@@ -1,4 +1,5 @@
 import sqlite3
+#hi
 db = sqlite3.connect("users.db", check_same_thread=False)
 global c
 c = db.cursor()
